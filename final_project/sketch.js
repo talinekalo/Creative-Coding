@@ -1,11 +1,16 @@
 var r = 200;
 var g = 50;
 var b= 100;
+var bShow1 = true;
+var bShow2 = true;
+var bShow3 = true;
+var bShow4 = true;
+var bShow5 = true;
+var bShow6 = true;
+var bShow7 = true;
+var bShow8 = true;
+var bShow9 = true;
 
-
-function setup(){
-
-}
 function draw(){
 	if(frameCount % 200 == 0){
 		r = random(0,255)
@@ -13,18 +18,6 @@ function draw(){
         b = random(0,255)
 	}
 }
-function hideImages(){
-  m.myCanvas.hide();
-  n.myCanvas.hide();
-  t.myCanvas.hide();
-  o.myCanvas.hide();
-  q.myCanvas.hide();
-  c.myCanvas.hide();
-  g.myCanvas.hide();
-  w.myCanvas.hide();
-}
-
-
 
 var sketch1 = function( p ) {
 
@@ -33,15 +26,17 @@ p.y = 0;
 p.size = 5;
 p.square1;
 p.myCanvas;
+p.bScale
 
   p.setup = function() {
   p.myCanvas = p.createCanvas(500, 500);
   p.myCanvas.position(0,0)
-  p.myCanvas.mouseOver(hideImages)
+  p.myCanvas.doubleClicked(p.scaleUp);
+  p.myCanvas.mouseClicked(p.scaleDown);
 
  
-    p.background(0);
-      p.noFill();
+  p.background(0);
+  p.noFill();
   p.frameRate(10);
 
   p.rectMode(p.CENTER);
@@ -50,6 +45,21 @@ p.myCanvas;
   };
 
   p.draw = function() {
+
+
+  p.push();
+
+
+    if(p.bScale == true){
+      p.translate(0,0);
+      p.scale(2.0);
+    }
+
+    else{
+      p.scale(1.0);
+          p.myCanvas.position(0,0);
+    }
+  
  
     stroke(0)
         for(p.j = 0; p.j < 7; p.j++){
@@ -106,6 +116,49 @@ p.myCanvas;
   p.rect(5,250,15,500);
   p.rect(250,495,500,15);
   p.rect(495,250,15,500);
+
+  p.pop();
+
+  if(bShow1 == false){
+    p.myCanvas.hide();
+  }
+  else{
+    p.myCanvas.show();
+
+  }
+
+  };
+
+  p.scaleUp = function(){
+    p.bScale = true;
+
+    p.myCanvas.size(1000,1000);
+    p.myCanvas.position(250,250);
+    bShow2 = false;
+    bShow3 = false;
+    bShow4 = false;
+    bShow5 = false;
+    bShow6 = false;
+    bShow7 = false;
+    bShow8 = false;
+    bShow9 = false;
+
+
+  };
+
+  p.scaleDown = function(){
+
+    p.bScale = false;
+
+    p.myCanvas.size(500,500);
+    bShow2 = true;
+    bShow3 = true;
+    bShow4 = true;
+    bShow5 = true;
+    bShow6 = true;
+    bShow7 = true;
+    bShow8 = true;
+    bShow9 = true;
 
   };
 
@@ -185,6 +238,7 @@ m.size1 = 5;
 m.sizeUp = 0.05;
 m.colr = 10;
 m.eColr = 255;
+m.bScale;
 
 m.myCanvas;
   m.setup = function() {
@@ -194,9 +248,27 @@ m.myCanvas;
       m.dx = ((2*m.PI) / m.period) * m.xspacing;
       m.yvalues = new Array(m.floor(m.w/m.xspacing));
       m.rectMode(m.CENTER)
+
+
+
+  m.myCanvas.doubleClicked(m.scaleUp);
+  m.myCanvas.mouseClicked(m.scaleDown);
   };
 
   m.draw = function() {
+  
+
+      if(m.bScale == true){
+     
+      m.scale(2.0);
+    }
+
+    else{
+      
+      m.scale(1.0);
+      m.myCanvas.position(500,0)
+    }
+ 
   m.background(m.colr);
  
   m.calcWave();
@@ -220,7 +292,48 @@ m.fill(0);
   m.rect(10,250,30,500);
   m.rect(250,490,500,30);
   m.rect(490,250,30,500);
+
+
+
+   if(bShow2 == false){
+    m.myCanvas.hide();
+  }
+  else{
+    m.myCanvas.show();
+
+  }
 };
+
+  m.scaleUp = function(){
+    m.bScale = true;
+
+    m.myCanvas.size(1000,1000);
+    m.myCanvas.position(250,250);
+    bShow1 = false;
+    bShow3 = false;
+    bShow4 = false;
+    bShow5 = false;
+    bShow6 = false;
+    bShow7 = false;
+    bShow8 = false;
+    bShow9 = false;
+  };
+
+  m.scaleDown = function(){
+
+    m.bScale = false;
+    //m.myCanvas.position(500,0)
+    m.myCanvas.size(500,500);
+
+    bShow1 = true;
+    bShow3 = true;
+    bShow4 = true;
+    bShow5 = true;
+    bShow6 = true;
+    bShow7 = true;
+    bShow8 = true;
+    bShow9 = true;
+  };
 
 m.calcWave = function() {
   // Increment theta (try different values for 
@@ -285,6 +398,7 @@ var sketch6 = function( n ) {
   n.color;
   n.strokeColor;
   n.angleUp = 0.3
+  n.bScale;
 
 
   n.myCanvas;
@@ -293,9 +407,23 @@ n.setup = function(){
     n.myCanvas.position(1000,0)
    // n.frameRate(10);
     n.rectMode(n.CENTER)
+
+    n.myCanvas.doubleClicked(n.scaleUp);
+    n.myCanvas.mouseClicked(n.scaleDown);
 }
 
 n.draw = function(){
+
+  n.push();
+
+  if(n.bScale == true){
+    n.translate(0,0);
+    n.scale(2.0)
+  }
+  else{
+    n.scale(1.0);
+    n.myCanvas.position(1000,0);
+  }
 
     n.background(255);
   
@@ -330,8 +458,46 @@ n.noStroke();
   n.rect(5,250,15,500);
   n.rect(250,495,500,15);
   n.rect(495,250,15,500);
+
+  n.pop();
+
+if(bShow3 == false){
+  n.myCanvas.hide();
+}
+else{
+  n.myCanvas.show();
+}
   
 }
+
+n.scaleUp = function(){
+  n.bScale = true;
+  n.myCanvas.size(1000,1000);
+  n.myCanvas.position(250,250)
+  bShow1 = false;
+  bShow2 = false;
+  bShow4 = false;
+  bShow5 = false;
+  bShow6 = false;
+  bShow7 = false;
+  bShow8 = false;
+  bShow9 = false;
+};
+
+n.scaleDown = function(){
+  n.bScale = false;
+  n.myCanvas.size(500,500);
+  bShow1 = true;
+  bShow2 = true;
+  bShow4 = true;
+  bShow5 = true;
+  bShow6 = true;
+  bShow7 = true;
+  bShow8 = true;
+  bShow9 = true;
+
+}
+
   
   
 };
@@ -342,6 +508,7 @@ var sketch5 = function(t){
 
   t.strk = 1;
   t.myCanvas
+  t.bScale;
 
   t.setup = function(){
 
@@ -352,8 +519,22 @@ var sketch5 = function(t){
     t.angleMode(t.DEGREES);
     t.frameRate(10);
 
+    t.myCanvas.doubleClicked(t.scaleUp);
+    t.myCanvas.mouseClicked(t.scaleDown);
+
   }
   t.draw = function(){
+
+    t.push();
+
+    if(t.bScale == true){
+      t.translate(0,0);
+      t.scale(2.0);
+    }
+    else{
+      t.scale(1.0)
+      t.myCanvas.position(0,500)
+    }
         t.background(200);
         t.noStroke();
         t.fill(0);
@@ -394,6 +575,45 @@ var sketch5 = function(t){
   t.rect(10,250,30,500);
   t.rect(250,490,500,30);
   t.rect(490,250,30,500);
+
+  t.pop();
+
+  if(bShow4 == false){
+    t.myCanvas.hide();
+  }
+  else{
+    t.myCanvas.show();
+  }
+
+  }
+
+  t.scaleUp = function(){
+    t.bScale = true;
+    t.myCanvas.size(1000,1000)
+    t.myCanvas.position(250,250)
+    bShow1 = false;
+    bShow2 = false;
+    bShow3 = false;
+    bShow5 = false;
+    bShow6 = false;
+    bShow7 = false;
+    bShow8 = false;
+    bShow9 = false;
+  }
+
+  t.scaleDown = function(){
+
+    t.bScale = false;
+    t.myCanvas.size(500,500);
+    bShow1 = true;
+    bShow2 = true;
+    bShow3 = true;
+    bShow5 = true;
+    bShow6 = true;
+    bShow7 = true;
+    bShow8 = true;
+    bShow9 = true;
+
   }
 
   t.star = function(width,length,rot,pos,strokee){
@@ -425,10 +645,13 @@ var centerSketch = function(o){
   o.angleUp = 1;
 
   o.myCanvas;
+
+
   o.setup = function(){
       o.myCanvas = o.createCanvas(500,500, o.WEBGL);
       o.myCanvas.position(500,500)
       o.angleMode(o.DEGREES)
+
 
   }
   
@@ -446,6 +669,13 @@ var centerSketch = function(o){
         o.tk();
         
         o.angle += o.angleUp
+
+        if(bShow5 == false){
+          o.myCanvas.hide();
+        }
+        else{
+          o.myCanvas.show();
+        }
   }
 
   o.tk = function(){
@@ -474,6 +704,7 @@ var myp5 = new p5(centerSketch);
 var sketch8 = function(q){
     q.angle = 45;
     q.colr;
+    q.bScale;
 
     q.myCanvas;
     q.setup = function(){
@@ -485,10 +716,24 @@ var sketch8 = function(q){
 
       q.colr = 255;
       q.strok = 0;
+      q.myCanvas.doubleClicked(q.scaleUp);
+      q.myCanvas.mouseClicked(q.scaleDown);
 
     }
 
     q.draw = function(){
+
+q.push();
+
+  if(q.bScale == true){
+    q.translate(0,0);
+    q.scale(2.0);
+  }
+  else{
+    q.scale(1.0);
+    q.myCanvas.position(1000,500);
+  }
+
       q.background(q.colr);
       q.stroke(q.strok);
 
@@ -569,7 +814,46 @@ q.stroke(q.strok)
       q.rotate(-45)
       q.branch(60,0.6);
       q.pop();
+q.pop();
 
+if(bShow6 == false){
+  q.myCanvas.hide();
+}
+else{
+  q.myCanvas.show();
+}
+
+    }
+
+    q.scaleUp = function(){
+      q.bScale = true;
+      q.myCanvas.size(1000,1000);
+      q.myCanvas.position(250,250)
+
+      bShow1 = false;
+      bShow2 = false;
+      bShow3 = false;
+      bShow4 = false;
+      bShow5 = false;
+      bShow7 = false;
+      bShow8 = false;
+      bShow9 = false;
+
+
+    }
+
+    q.scaleDown = function(){
+      q.bScale = false;
+      q.myCanvas.size(500,500);
+
+      bShow1 = true;
+      bShow2 = true;
+      bShow3 = true;
+      bShow4 = true;
+      bShow5 = true;
+      bShow7 = true;
+      bShow8 = true;
+      bShow9 = true;
     }
 
     q.branch = function(len,multiple){
@@ -628,12 +912,17 @@ var myp5 = new p5(sketch8)
     c.greenVal2;
     c.blueVal2;
 
+    c.bScale;
+
   c.setup = function(){
     c.angleMode(c.DEGREES);
     c.myCanvas = c.createCanvas(500,500);
     c.myCanvas.position(0,1000)
     c.background(0);
 
+    c.myCanvas.doubleClicked(c.scaleUp);
+    c.myCanvas.mouseClicked(c.scaleDown);
+c.push();
 
     for (c.i = 0; c.i < 90; c.i ++){
 
@@ -656,6 +945,15 @@ var myp5 = new p5(sketch8)
 
 
 
+
+if(c.bScale == true){
+  c.translate(0,0);
+  c.scale(2.0);
+}
+else{
+  c.scale(1.0);
+  c.myCanvas.position(0,1000);
+}
         for (c.i=0;c.i<c.squares.length;c.i++){
 
           c.squares[c.i].animate();
@@ -680,6 +978,8 @@ var myp5 = new p5(sketch8)
   c.rect(0,485,500,15);
   c.rect(485,0,15,500);
 
+  c.pop();
+
     c.redVal = r;
     c.greenVal = g;
     c.blueVal = b;
@@ -692,7 +992,45 @@ var myp5 = new p5(sketch8)
     c.greenVal2 = g*2;
     c.blueVal2 = b*2;
 
+
+
+if(bShow7 == false){
+  c.myCanvas.hide();
+}
+else{
+  c.myCanvas.show();
+}
+
   }
+
+c.scaleUp = function(){
+  c.bScale = true
+  c.myCanvas.size(1000,1000);
+  c.myCanvas.position(250,250)
+
+  bShow1 = false;
+  bShow2 = false;
+  bShow3 = false;
+  bShow4 = false;
+  bShow5 = false;
+  bShow6 = false;
+  bShow8 = false;
+  bShow9 = false;
+}
+
+c.scaleDown = function(){
+  c.bScale = false;
+  c.myCanvas.size(500,500);
+
+  bShow1 = true;
+  bShow2 = true;
+  bShow3 = true;
+  bShow4 = true;
+  bShow5 = true;
+  bShow6 = true;
+  bShow8 = true;
+  bShow9 = true;
+}
 
 
 function square(canvas,xPos,yPos,xVel,yVel,color, rot, rotStep){
@@ -755,15 +1093,30 @@ g.rot = 36
 g.rotStep = 1;
 
 g.myCanvas;
+
+g.bScale;
   g.setup = function(){
 
     g.myCanvas = g.createCanvas(500,500);
     g.myCanvas.position(500,1000);
     g.angleMode(g.DEGREES)
     g.rectMode(g.CENTER)
+    g.myCanvas.doubleClicked(g.scaleUp);
+    g.myCanvas.mouseClicked(g.scaleDown);
   }
 
   g.draw = function(){
+
+g.push();
+
+if(g.bScale == true){
+  g.translate(0,0);
+  g.scale(2.0);
+}
+else{
+  g.scale(1.0);
+  g.myCanvas.position(500,1000);
+}
     g.background(g.colr);
     g.strokeWeight(g.weight)
 
@@ -802,7 +1155,46 @@ g.l+=g.lUp;
   g.rect(10,250,30,500);
   g.rect(250,490,500,30);
   g.rect(490,250,30,500);
+
+g.pop();
+
+if(bShow8 == false){
+  g.myCanvas.hide();
+}
+else{
+  g.myCanvas.show();
+}
+
 };
+
+g.scaleUp = function(){
+  g.bScale = true;
+  g.myCanvas.size(1000,1000);
+  g.myCanvas.position(250,250)
+
+  bShow1 = false;
+  bShow2 = false;
+  bShow3 = false;
+  bShow4 = false;
+  bShow5 = false;
+  bShow6 = false;
+  bShow7 = false;
+  bShow9 = false;
+}
+
+g.scaleDown = function(){
+  g.bScale = false;
+  g.myCanvas.size(500,500);
+
+  bShow1 = true;
+  bShow2 = true;
+  bShow3 = true;
+  bShow4 = true;
+  bShow5 = true;
+  bShow6 = true;
+  bShow7 = true;
+  bShow9 = true;
+}
   
 
 g.flower = function(a,b,q,f){
@@ -852,6 +1244,8 @@ var sketch2 = function(w){
         w.back1;
         w.back2;
         w.back3;
+
+        w.bScale;
   w.setup = function(){
 
         w.myCanvas = w.createCanvas(500,500);
@@ -885,15 +1279,27 @@ var sketch2 = function(w){
         w.square1 = new square(w,0,10);
         w.square2 = new square(w,0,-10);
 
+
       w.background(r/2,g/2,b/2); 
+
+      w.myCanvas.doubleClicked(w.scaleUp);
+      w.myCanvas.mouseClicked(w.scaleDown);
  
 
   }
 
   w.draw = function(){
+    
+    w.push();
 
-
-
+    if(w.bScale == true){
+      w.translate(0,0);
+      w.scale(2.0);
+    }
+    else{
+      w.scale(1.0);
+      w.myCanvas.position(1000,1000)
+    }
           w.element1.display();
           w.element1.animate();
 
@@ -953,14 +1359,50 @@ var sketch2 = function(w){
           w.rect(5,250,15,500);
           w.rect(250,495,500,15);
           w.rect(495,250,15,500);
+  w.pop();
 
           if(frameCount % 200 == 0){
           w.background(r/2,g/2,b/2);
 
         }
 
+  if(bShow9 == false){
+    w.myCanvas.hide();
+  }
+  else{
+    w.myCanvas.show();
   }
 
+  };
+
+  w.scaleUp = function(){
+    w.bScale = true;
+    w.myCanvas.size(1000,1000);
+    w.myCanvas.position(250,250)
+
+  bShow1 = false;
+  bShow2 = false;
+  bShow3 = false;
+  bShow4 = false;
+  bShow5 = false;
+  bShow6 = false;
+  bShow7 = false;
+  bShow8 = false;
+
+  }
+w.scaleDown = function(){
+  w.bScale = false;
+  w.myCanvas.size(500,500);
+
+  bShow1 = true;
+  bShow2 = true;
+  bShow3 = true;
+  bShow4 = true;
+  bShow5 = true;
+  bShow6 = true;
+  bShow7 = true;
+  bShow8 = true;
+}
 
 
   function zoom(canvas,xVal, yVal, xVel, yVel,rot ,a, b,c, d){
